@@ -1,0 +1,11 @@
+{
+  "manifestVersion": 1,
+  "id": "loot-tracker",
+  "version": "0.1.0",
+  "name": "Loot Tracker",
+  "description": "Track loot per session and map. Live value via poe.ninja, drops/hour, top items, export.",
+  "author": "cccarv82",
+  "scalpelMinVersion": "0.9.13",
+  "poeVersions": [1, 2],
+  "homepage": "https://github.com/cccarv82/scalpel-loot-tracker"
+}
