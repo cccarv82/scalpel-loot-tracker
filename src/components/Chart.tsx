@@ -43,7 +43,7 @@ export function Chart({ divinePrice }: Props) {
           color: 'var(--text-muted, rgba(255,255,255,0.55))',
         }}
       >
-        Valor por mapa ({unit})
+        Value per map ({unit})
       </div>
       <div
         style={{
@@ -61,7 +61,7 @@ export function Chart({ divinePrice }: Props) {
       >
         {!hasValue && (
           <div style={{ width: '100%', textAlign: 'center', color: 'rgba(255,255,255,0.4)', fontSize: 12 }}>
-            sem dados de valor ainda
+            no value data yet
           </div>
         )}
         {hasValue &&
@@ -115,7 +115,7 @@ export function Chart({ divinePrice }: Props) {
               )}
             </div>
             <div style={{ opacity: 0.6 }}>
-              {data[hover.i].items} itens
+              {data[hover.i].items} items
               {data[hover.i].durationMs != null && ` · ${formatMin(data[hover.i].durationMs as number)}`}
             </div>
           </div>

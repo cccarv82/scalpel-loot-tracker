@@ -21,7 +21,7 @@ export function MapList() {
   if (items.length === 0) {
     return (
       <div style={{ padding: 16, opacity: 0.6, fontSize: 13 }}>
-        Sem mapas registrados ainda. Entre num mapa pra começar.
+        No maps recorded yet. Enter a map to start tracking.
       </div>
     )
   }
@@ -49,7 +49,7 @@ export function MapList() {
               )}
             </div>
             <div style={{ fontSize: 12, opacity: 0.75 }}>
-              {list.length} itens · {Math.round(sum)} {baseLabel()}
+              {list.length} items · {Math.round(sum)} {baseLabel()}
               {run.exitedAt && (
                 <span style={{ marginLeft: 6 }}>· {formatDuration(run.exitedAt - run.enteredAt)}</span>
               )}

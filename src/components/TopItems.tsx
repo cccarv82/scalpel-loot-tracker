@@ -18,7 +18,7 @@ export function TopItems({ divinePrice }: Props) {
   if (top.length === 0) {
     return (
       <div style={{ padding: 16, opacity: 0.6, fontSize: 13 }}>
-        Nenhum item capturado ainda. Use o hotkey de price-check (Ctrl+C) num item pra adicionar.
+        No items captured yet. Use the price-check hotkey (Ctrl+D by default) on an item to add it.
       </div>
     )
   }
@@ -34,7 +34,7 @@ export function TopItems({ divinePrice }: Props) {
           color: 'var(--text-muted)',
         }}
       >
-        Top da sessão
+        Top of session
       </div>
       <ol style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: 4 }}>
         {top.map((e, i) => {

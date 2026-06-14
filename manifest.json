@@ -1,7 +1,7 @@
 {
   "manifestVersion": 1,
   "id": "loot-tracker",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "name": "Loot Tracker",
   "description": "Track loot per session and map. Live value via poe.ninja, drops/hour, top items, export.",
   "author": "cccarv82",

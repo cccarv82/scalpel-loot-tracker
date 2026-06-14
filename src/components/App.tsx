@@ -50,7 +50,7 @@ export function App({ ctx }: Props) {
   }, [ctx, store.savedHistory])
 
   const onReset = () => {
-    if (!confirm('Resetar sessão atual? (mantém histórico)')) return
+    if (!confirm('Reset current session? (history is kept)')) return
     store.resetSession({ league: ctx.getLeague(), poeVersion: ctx.getPoeVersion(), archive: true })
   }
 
@@ -88,7 +88,7 @@ export function App({ ctx }: Props) {
             CSV
           </button>
           <button type="button" onClick={() => setShowSettings((v) => !v)} style={btnStyle}>
-            {showSettings ? 'Fechar' : 'Settings'}
+            {showSettings ? 'Close' : 'Settings'}
           </button>
         </div>
       </header>
@@ -107,7 +107,7 @@ export function App({ ctx }: Props) {
               color: 'var(--text-muted)',
             }}
           >
-            Mapas
+            Maps
           </div>
           <MapList />
         </section>

@@ -21,10 +21,10 @@ export function SettingsPanel() {
           color: 'var(--text-muted)',
         }}
       >
-        Configurações
+        Settings
       </div>
       <label style={{ display: 'flex', justifyContent: 'space-between', gap: 8, fontSize: 13 }}>
-        <span>Valor mínimo (chaos/ex) pra contar</span>
+        <span>Minimum value (chaos/ex) to count</span>
         <input
           type="number"
           min={0}
@@ -35,7 +35,7 @@ export function SettingsPanel() {
         />
       </label>
       <label style={{ display: 'flex', justifyContent: 'space-between', gap: 8, fontSize: 13 }}>
-        <span>Reset auto em mudança de liga</span>
+        <span>Auto-reset on league change</span>
         <input
           type="checkbox"
           checked={settings.autoResetOnLeagueChange}
@@ -43,7 +43,7 @@ export function SettingsPanel() {
         />
       </label>
       <label style={{ display: 'flex', justifyContent: 'space-between', gap: 8, fontSize: 13 }}>
-        <span>Usar timestamps do Client.txt (mais preciso)</span>
+        <span>Use Client.txt timestamps (more precise)</span>
         <input
           type="checkbox"
           checked={settings.showLogTimings}

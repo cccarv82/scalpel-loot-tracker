@@ -35,11 +35,11 @@ export function Stats({ divinePrice, pricesUpdatedAt }: Props) {
         marginBottom: 12,
       }}
     >
-      <Metric label="Sessão" value={duration} />
-      <Metric label="Mapas" value={String(maps.length)} />
-      <Metric label="Itens" value={String(list.length)} />
+      <Metric label="Session" value={duration} />
+      <Metric label="Maps" value={String(maps.length)} />
+      <Metric label="Items" value={String(list.length)} />
       <Metric
-        label="Valor total"
+        label="Total value"
         value={
           divine != null
             ? `${divine.toFixed(1)} div`
@@ -47,7 +47,7 @@ export function Stats({ divinePrice, pricesUpdatedAt }: Props) {
         }
         hint={divine != null ? `${Math.round(chaos)} ${baseLabel()}` : undefined}
       />
-      <Metric label="Por hora" value={divinePrice ? `${(cph / divinePrice).toFixed(2)} div/h` : `${Math.round(cph)} c/h`} />
+      <Metric label="Per hour" value={divinePrice ? `${(cph / divinePrice).toFixed(2)} div/h` : `${Math.round(cph)} c/h`} />
       <Metric label="Drops/h" value={dph.toFixed(1)} />
       {pricesUpdatedAt && <Metric label="Ninja" value={timeAgo(pricesUpdatedAt)} dim />}
     </div>
@@ -72,7 +72,7 @@ function baseLabel(): string {
 
 function timeAgo(t: number): string {
   const s = Math.floor((Date.now() - t) / 1000)
-  if (s < 60) return `${s}s atrás`
-  if (s < 3600) return `${Math.floor(s / 60)}m atrás`
-  return `${Math.floor(s / 3600)}h atrás`
+  if (s < 60) return `${s}s ago`
+  if (s < 3600) return `${Math.floor(s / 60)}m ago`
+  return `${Math.floor(s / 3600)}h ago`
 }
