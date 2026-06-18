@@ -134,12 +134,65 @@ const activate: PluginActivate = async (ctx: ScalpelPluginContext) => {
     st.resetSession({ league, poeVersion: ctx.getPoeVersion(), archive: true })
   })
 
-  // 7. Hotkey: star the most recently captured item
-  ctx.registerHotkey({ label: 'Star last item' }, () => {
-    const entries = Object.values(useStore.getState().entries)
-    if (entries.length === 0) return
-    const latest = entries.reduce((a, b) => (a.capturedAt >= b.capturedAt ? a : b))
-    useStore.getState().toggleStar(latest.id)
+  // 7. Hotkey: capture hovered item directly (bypasses Scalpel's main Ctrl+D
+  // price-check flow which calls the official PoE trade API — that endpoint
+  // has a real cost and GGG will rate-limit you out).
+  //
+  // Press this binding while hovering an item. We send Ctrl+C ourselves via
+  // copyAndEvaluateItem, get the parsed PoeItem back, and add it to the
+  // tracker without going through the price-check UI.
+  ctx.registerHotkey({ label: 'Capture hovered item' }, async () => {
+    try {
+      const item = await ctx.copyAndEvaluateItem()
+      if (!item) return
+      const indexNow = priceIndex
+      const hash = hashItem({
+        name: item.name,
+        baseType: item.baseType,
+        itemClass: item.itemClass,
+        rarity: item.rarity,
+        itemLevel: item.itemLevel,
+        quality: item.quality,
+        stackSize: item.stackSize,
+        sockets: item.sockets,
+        corrupted: item.corrupted,
+        identified: item.identified,
+        explicits: item.explicits,
+        implicits: item.implicits,
+        enchants: item.enchants,
+        imbues: item.imbues,
+      })
+      const price = lookupPrice(
+        {
+          name: item.name,
+          baseType: item.baseType,
+          itemClass: item.itemClass,
+          rarity: item.rarity,
+          stackSize: item.stackSize,
+        },
+        indexNow,
+      )
+      const zone = ctx.getCurrentZone()
+      const entry = {
+        id: makeEntryId(),
+        hash,
+        name: item.name,
+        baseType: item.baseType,
+        itemClass: item.itemClass,
+        rarity: item.rarity,
+        stackSize: Math.max(1, item.stackSize),
+        itemLevel: item.itemLevel,
+        mapTier: item.mapTier,
+        chaosValue: price.chaosValue,
+        divineValue: price.divineValue,
+        starred: true, // star captured-via-hotkey items so they're easy to find
+        capturedAt: Date.now(),
+        zoneKey: zone?.areaCode ?? null,
+      }
+      useStore.getState().addEntry(entry)
+    } catch {
+      // ignore — no item in clipboard / not a valid PoE item
+    }
   })
 
   // 8. Register the tab and mount React
